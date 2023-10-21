@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShkollaA1.Data;
+using ShkollaA1.Models;
 
 namespace ShkollaA1.Controllers
 {
@@ -35,6 +36,57 @@ namespace ShkollaA1.Controllers
 
             var curriculum = await _context.Curriculums.FirstOrDefaultAsync(m => m.Id == id);
             return View(curriculum);
+        }
+
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,Weeks,Hours")] Curriculum curriculum)
+        {
+            _context.Add(curriculum);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null || _context.Curriculums == null)
+            {
+                return NotFound();
+            }
+
+            var curriculum = await _context.Curriculums.FindAsync(id);
+            return View(curriculum);
+        }
+
+        // POST: Teacher/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,Weeks,Hours")] Curriculum curriculum)
+        {
+            if (id != curriculum.Id)
+            {
+                return NotFound();
+            }
+
+            try
+            {
+                _context.Update(curriculum);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw;
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }
