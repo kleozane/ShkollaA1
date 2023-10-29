@@ -17,5 +17,6 @@ namespace ShkollaA1.Data
         public DbSet<ShkollaA1.Models.Teacher> Teacher { get; set; } = default!;
         public DbSet<ShkollaA1.Models.Subject> Subjects { get; set; } = default!;
         public DbSet<ShkollaA1.Models.Curriculum> Curriculums { get; set; } = default!;
+        public DbSet<ShkollaA1.Models.Classroom> Classrooms { get; set; } = default!;
     }
 }

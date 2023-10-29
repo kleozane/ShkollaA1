@@ -88,5 +88,13 @@ namespace ShkollaA1.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> Delete(int? id)
+        {
+            var curriculumToDelete = _context.Curriculums.Where(x => x.Id == id).FirstOrDefault();
+             _context.Remove(curriculumToDelete);
+            _context.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

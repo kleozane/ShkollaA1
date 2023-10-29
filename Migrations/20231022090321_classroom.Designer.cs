@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShkollaA1.Data;
 
@@ -10,9 +11,10 @@ using ShkollaA1.Data;
 namespace ShkollaA1.Migrations
 {
     [DbContext(typeof(ShkollaA1Context))]
-    partial class ShkollaA1ContextModelSnapshot : ModelSnapshot
+    [Migration("20231022090321_classroom")]
+    partial class classroom
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
